@@ -1,6 +1,18 @@
 /*------------------------------------*\
   #FONTS
 \*------------------------------------*/
+@font-face {
+    font-family: "general sans";
+    font-weight: 200;
+    src: url("../fonts/GeneralSans-Medium.woff") format("woff");
+}
+
+@font-face {
+    font-family: "general sans";
+    font-weight: 400;
+    src: url("../fonts/GeneralSans-Regular.woff") format("woff");
+}
+
 
 /*------------------------------------*\
   #GENERIC
@@ -14,11 +26,12 @@
 
 html {
     font-size: 16px;
-    line-height: 24px;
-    font-family: Helvetica, arial, sans-serif;
-    box-sizing: border-box;
+    line-height: 1.5;
+    font-family: "general sans", Helvetica, arial, sans-serif;
+    color: #111;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
 }
 
 *,
@@ -34,14 +47,8 @@ html {
  * Customize the background color to match your design.
  */
 
-::-moz-selection {
-    background: #0053FB;
-    color: white;
-    text-shadow: none;
-}
-
 ::selection {
-    background: #0053FB;
+    background: #e85e00;
     color: white;
     text-shadow: none;
 }
@@ -67,34 +74,28 @@ img {
     Default markup for typographic elements
 */
 
-h1,
-h2,
-h3 {
-    font-weight: 400;
-}
-
 h1 {
     font-size: 36px;
-    line-height: 48px;
-    margin: 0 0 24px;
-}
-
-h2 {
-    font-size: 32px;
     line-height: 40px;
     margin: 0 0 24px;
 }
 
-h3 {
-    font-size: 26px;
+h2 {
+    font-size: 23px;
     line-height: 32px;
+    margin: 0 0 24px;
+}
+
+h3 {
+    font-size: 18px;
+    line-height: 24px;
     margin: 0 0 24px;
 }
 
 h4,
 h5,
 h6 {
-    font-size: 20px;
+    font-size: 16px;
     line-height: 24px;
     margin: 0 0 24px;
 }
@@ -120,10 +121,11 @@ li ol {
 }
 
 blockquote {
-    font-style: normal;
+    font-style: italic;
     font-size: 23px;
     line-height: 32px;
     margin: 0 0 24px;
+    font-family: "Times New Roman", serif;
 }
 
 blockquote * {
@@ -132,10 +134,10 @@ blockquote * {
 }
 
 figcaption {
-    font-weight: 400;
     font-size: 12px;
     line-height: 16px;
-    margin-top: 8px;
+    padding-top: 8px;
+    color: Grey;
 }
 
 hr {
@@ -146,15 +148,18 @@ hr {
 }
 
 a {
-    color: #1195F7;
+    color: #007c89;
     transition: all .1s ease-in-out;
 }
 
 a:visited,
-a:active,
+a:active {
+    color: #007c89;
+}
+
 a:hover,
 a:focus {
-    color: #8EC7FF;
+    color: Crimson;
 }
 
 /*------------------------------------*\
@@ -168,15 +173,21 @@ a:focus {
 */
 
 .o-row {
-    position: relative;
     padding: 24px 24px 0;
+    position: relative;
     display: flow-root;
 }
 
 /* size modifiers */
 
 .o-row--lg {
-    padding: 48px 24px 24px;
+    padding-top: 48px;
+    padding-bottom: 24px;
+}
+
+.o-row--xl {
+    padding-top: 72px;
+    padding-bottom: 48px;
 }
 
 @media (min-width: 768px) {
@@ -186,13 +197,20 @@ a:focus {
     }
 
     .o-row--md {
-        padding-top: 48px;
+        
         padding-bottom: 24px;
     }
 
     .o-row--lg {
-        padding-top: 72px;
+        
         padding-bottom: 48px;
+    }
+}
+
+@media (min-width: 992px) {
+    .o-row--xl {
+        padding-top: 96px;
+        padding-bottom: 72px;
     }
 }
 
@@ -205,7 +223,8 @@ a:focus {
 .o-container {
     margin-left: auto;
     margin-right: auto;
-    max-width: 56.4em; /* 56.4 * 20px = 1128px */
+    width: 100%;
+    max-width: 90em; /* 90 * 16px = 1440px */
 }
 
 /*
@@ -215,7 +234,7 @@ a:focus {
 */
 
 .o-section {
-    display: flow-root; /* New solution! Fixes margin collapsing */
+    display: flow-root;
 }
 
 .o-section + .o-section {
@@ -244,6 +263,8 @@ a:focus {
 */
 
 .o-layout {
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
     flex-wrap: wrap;
 }
@@ -361,22 +382,60 @@ a:focus {
     padding: 0;
 }
 
+
+/*
+    Objects: List
+    ---
+    Small reusable object to remove default list styling from lists
+*/
+
+.o-list {
+    list-style: none;
+    padding: 0;
+}
+
+/*
+    Object: Button reset
+    ---
+    Small button reset object
+*/
+
+.o-button-reset {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: transparent;
+
+    /* inherit font & color from ancestor */
+    color: inherit;
+    font: inherit;
+
+    /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+    line-height: normal;
+
+    /* Corrects font smoothing for webkit */
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+
+    /* Corrects inability to style clickable `input` types in iOS */
+    -webkit-appearance: none;
+}
+
 /*------------------------------------*\
   #COMPONENTS
 \*------------------------------------*/
 
+/*
+    Component: Component name
+    ---
+    Component description
+*/
+
 /*------------------------------------*\
   #UTILITIES
 \*------------------------------------*/
-
-/*
-    Utilities: color
-    ---
-    Utility classes to put specific colors onto elements
-*/
-
-.u-color-secondary-base {
-}
 
 /*
     Utilities: spacing
@@ -418,16 +477,12 @@ a:focus {
     Utility classes to put specific max widths onto elements
 */
 
-.u-max-width-xs {
-    max-width: 18em !important;
-}
-
 .u-max-width-sm {
-    max-width: 32em !important;
+    max-width: 36em !important;
 }
 
 .u-max-width-md {
-    max-width: 42em !important;
+    max-width: 45em !important;
 }
 
 .u-max-width-lg {
@@ -435,7 +490,7 @@ a:focus {
 }
 
 .u-max-width-xl {
-    max-width: 70em !important;
+    max-width: 75em !important;
 }
 
 .u-max-width-none {
@@ -650,34 +705,6 @@ a:focus {
 \*------------------------------------*/
 
 /*
-    Media Queries
-    ---
-    EXAMPLE Media Queries for Responsive Design.
-    These examples override the primary ('mobile first') styles.
-    USE THEM INLINE!
-*/
-
-/* Extra small devices (portrait phones, less than 576px)
-   No media query since this is the default in mobile first design
-*/
-
-/* Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) {}
-*/
-
-/* Medium devices (tablets, 768px and up)
-@media (min-width: 768px) {}
-*/
-
-/* Large devices (landscape tablets, desktops, 992px and up)
-@media (min-width: 992px) {}
-*/
-
-/* Extra large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) {}
-*/
-
-/*
     Print styles.
     ---
     Inlined to avoid the additional HTTP request:
@@ -743,3 +770,135 @@ a:focus {
         page-break-after: avoid;
     }
 }
+
+header{
+    background-color:#ffe01b ;
+}
+
+.c-logo{
+    height: 48px;
+    display: flex;
+}
+
+.c-logo__symbol{
+    height: 100%;
+}
+
+/*
+    Component: Nav
+    ---
+    Main navigation of the site
+*/
+
+.c-nav {
+    font-size: 13px;
+    line-height: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.c-nav__link {
+    text-decoration: none;
+    font-weight: 600;
+    display: block;
+    padding: 8px 0;
+}
+
+.c-nav__link,
+.c-nav__link:visited,
+.c-nav__link:active {
+    color: #fff;
+}
+
+.c-nav__link:hover,
+.c-nav__link:focus {
+    color: #DBEDFF;
+    text-shadow: 0 0 8px #8EC7FF;
+}
+
+@media (min-width: 992px) {
+    .c-nav__list {
+        display: flex;
+        align-items: center;
+        /* margin-left: -16px;
+        margin-right: -16px; */
+    }
+
+    .c-nav__link {
+        padding: 12px 16px;
+    }
+
+    .c-nav__item--cta {
+        margin-left: 16px;
+    }
+}
+
+/*
+    Component: header
+    ---
+    Main header of the website
+*/
+
+.c-header__nav {
+    display: none;
+}
+
+@media (min-width: 999px) {
+    .c-header {
+        display: flex;
+        justify-content: space-between;
+        
+    }
+
+    .c-header__nav {
+        display: block;
+    }
+}
+
+/*
+    Component: CTA link
+    ---
+    Small cta link with custom animation
+*/
+
+.c-link-cta {
+    display: inline-block;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 13px;
+    line-height: 24px;
+    font-weight: 600;
+    padding: 16px 32px;
+    transition-duration: .25s;
+    transition-timing-function: ease-in-out;
+    background: #007c89;
+    background-size: 200% auto;
+    box-shadow: inset 0 0 0 1px rgba(142,199,255,.2), 0 0 10px rgba(17,149,255,.30) ;
+}
+
+.c-link-cta,
+.c-link-cta:visited,
+.c-link-cta:active {
+    color: #DBEDFF;
+}
+
+.c-link-cta:hover {
+    color: #fff;
+    background-position: right center;
+    box-shadow: inset 0 0 0 1px rgba(142,199,255,.4), 0 0 10px rgba(17,149,255,.8) ;
+}
+
+
+
+.c-section__link{
+    color: #007c89;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 999px) { 
+
+    .c-figure__nav{ display: none; }  
+    
+    }
+
